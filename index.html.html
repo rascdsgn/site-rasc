@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico Gratuito | Tráfego Pago para Clínicas em Maringá</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #B8FF4A;
+    --verde-dark: #8FCC2A;
+    --preto: #0D0D0D;
+    --cinza-escuro: #1A1A1A;
+    --cinza-medio: #2A2A2A;
+    --cinza-texto: #888;
+    --branco: #F5F5F0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--preto);
+    color: var(--branco);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* HEADER */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 5%;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: sticky;
+    top: 0;
+    background: rgba(13,13,13,0.92);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .logo span { color: var(--verde); }
+
+  .header-cta {
+    background: var(--verde);
+    color: var(--preto);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  }
+
+  .header-cta:hover {
+    background: var(--verde-dark);
+    transform: translateY(-1px);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 5% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(184,255,74,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 30%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(184,255,74,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(184,255,74,0.1);
+    border: 1px solid rgba(184,255,74,0.3);
+    color: var(--verde);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    margin-bottom: 32px;
+    width: fit-content;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--verde);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    color: var(--cinza-texto);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 20px;
+    animation: fadeDown 0.6s ease 0.1s both;
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    max-width: 900px;
+    margin-bottom: 32px;
+    animation: fadeDown 0.6s ease 0.2s both;
+  }
+
+  .hero-title .highlight {
+    color: var(--verde);
+    display: inline-block;
+    position: relative;
+  }
+
+  .hero-title .line-through {
+    color: var(--cinza-texto);
+    text-decoration: line-through;
+    text-decoration-color: rgba(255,80,80,0.6);
+  }
+
+  .hero-subtitle {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: rgba(245,245,240,0.6);
+    max-width: 560px;
+    line-height: 1.6;
+    margin-bottom: 48px;
+    animation: fadeDown 0.6s ease 0.3s both;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeDown 0.6s ease 0.4s both;
+  }
+
+  .btn-primary {
+    background: var(--verde);
+    color: var(--preto);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 18px 36px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: all 0.25s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn-primary:hover {
+    background: var(--verde-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(184,255,74,0.25);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--branco);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 18px 32px;
+    border: 1px solid rgba(255,255,255,0.15);
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: all 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.05);
+  }
+
+  .hero-urgency {
+    margin-top: 24px;
+    font-size: 0.82rem;
+    color: var(--cinza-texto);
+    animation: fadeDown 0.6s ease 0.5s both;
+  }
+
+  .hero-urgency strong { color: #FF6B6B; font-weight: 500; }
+
+  /* PROVA SOCIAL */
+  .social-proof {
+    padding: 24px 5%;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    gap: 48px;
+    align-items: center;
+    flex-wrap: wrap;
+    background: rgba(255,255,255,0.02);
+  }
+
+  .proof-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .proof-number {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: var(--verde);
+    letter-spacing: -0.04em;
+  }
+
+  .proof-label {
+    font-size: 0.78rem;
+    color: var(--cinza-texto);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .proof-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  /* PROBLEMA */
+  .problema {
+    padding: 100px 5%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--verde);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--verde);
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    margin-top: 56px;
+  }
+
+  .card {
+    background: var(--preto);
+    padding: 36px 32px;
+    transition: background 0.3s;
+  }
+
+  .card:hover { background: var(--cinza-escuro); }
+
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .card-text {
+    font-size: 0.9rem;
+    color: rgba(245,245,240,0.55);
+    line-height: 1.65;
+  }
+
+  /* CASO REAL */
+  .caso-real {
+    padding: 80px 5%;
+    background: var(--cinza-escuro);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .caso-real::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -5%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(184,255,74,0.06) 0%, transparent 70%);
+  }
+
+  .caso-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .caso-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cinza-texto);
+    margin-bottom: 8px;
+  }
+
+  .caso-quote {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    margin-bottom: 32px;
+  }
+
+  .caso-quote em {
+    color: var(--cinza-texto);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .arrow-line {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--cinza-texto);
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+  }
+
+  .arrow-line::before {
+    content: '→';
+    color: var(--verde);
+    font-size: 1rem;
+  }
+
+  .resultado-box {
+    background: var(--preto);
+    border: 1px solid rgba(184,255,74,0.2);
+    padding: 32px;
+    position: relative;
+  }
+
+  .resultado-box::before {
+    content: 'RESULTADO EM 30 DIAS';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: var(--verde);
+    color: var(--preto);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+  }
+
+  .resultado-item {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .resultado-item:last-child { border-bottom: none; }
+
+  .resultado-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    color: var(--verde);
+    letter-spacing: -0.05em;
+    min-width: 90px;
+  }
+
+  .resultado-desc {
+    font-size: 0.9rem;
+    color: rgba(245,245,240,0.65);
+    line-height: 1.4;
+  }
+
+  /* METRICA */
+  .metrica {
+    padding: 100px 5%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 56px;
+  }
+
+  .col-wrong {
+    border: 1px solid rgba(255,80,80,0.2);
+    padding: 36px;
+    background: rgba(255,80,80,0.04);
+  }
+
+  .col-right {
+    border: 1px solid rgba(184,255,74,0.2);
+    padding: 36px;
+    background: rgba(184,255,74,0.04);
+  }
+
+  .col-header {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .col-wrong .col-header { color: #FF6B6B; }
+  .col-right .col-header { color: var(--verde); }
+
+  .metric-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    font-size: 0.92rem;
+    color: rgba(245,245,240,0.7);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    line-height: 1.5;
+  }
+
+  .metric-item:last-child { border-bottom: none; }
+
+  .metric-icon { font-size: 1rem; margin-top: 1px; flex-shrink: 0; }
+
+  /* PERGUNTAS */
+  .perguntas {
+    padding: 80px 5%;
+    background: var(--cinza-escuro);
+  }
+
+  .perguntas-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .pergunta-card {
+    background: var(--preto);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 28px 32px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    text-align: left;
+    transition: border-color 0.3s;
+  }
+
+  .pergunta-card:hover { border-color: rgba(184,255,74,0.3); }
+
+  .pergunta-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    color: rgba(184,255,74,0.2);
+    letter-spacing: -0.05em;
+    line-height: 1;
+    min-width: 48px;
+  }
+
+  .pergunta-text {
+    font-size: 1rem;
+    color: rgba(245,245,240,0.8);
+    line-height: 1.5;
+    padding-top: 6px;
+  }
+
+  .pergunta-alert {
+    margin-top: 32px;
+    background: rgba(255,80,80,0.08);
+    border: 1px solid rgba(255,80,80,0.2);
+    padding: 20px 28px;
+    font-size: 0.95rem;
+    color: rgba(245,245,240,0.75);
+    line-height: 1.6;
+  }
+
+  .pergunta-alert strong { color: #FF6B6B; }
+
+  /* OFERTA */
+  .oferta {
+    padding: 120px 5%;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .oferta-box {
+    background: var(--cinza-escuro);
+    border: 1px solid rgba(184,255,74,0.25);
+    padding: 60px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .oferta-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(184,255,74,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .oferta-titulo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.04em;
+    margin-bottom: 16px;
+  }
+
+  .oferta-subtitulo {
+    font-size: 1.05rem;
+    color: rgba(245,245,240,0.55);
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto 40px;
+  }
+
+  .oferta-includes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 48px;
+    text-align: left;
+  }
+
+  .include-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: rgba(245,245,240,0.75);
+    background: rgba(255,255,255,0.03);
+    padding: 12px 16px;
+  }
+
+  .include-item::before {
+    content: '✓';
+    color: var(--verde);
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .oferta-limit {
+    font-size: 0.82rem;
+    color: var(--cinza-texto);
+    margin-top: 20px;
+  }
+
+  .oferta-limit strong { color: #FF6B6B; }
+
+  /* FORM */
+  .form-section {
+    padding: 80px 5%;
+    background: var(--cinza-escuro);
+  }
+
+  .form-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .form-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    letter-spacing: -0.04em;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .form-sub {
+    font-size: 0.95rem;
+    color: var(--cinza-texto);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cinza-texto);
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    background: var(--preto);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--branco);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    padding: 14px 18px;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: rgba(184,255,74,0.5);
+  }
+
+  .form-group input::placeholder {
+    color: rgba(255,255,255,0.2);
+  }
+
+  .form-group select option {
+    background: var(--cinza-escuro);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .btn-form {
+    width: 100%;
+    background: var(--verde);
+    color: var(--preto);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    padding: 20px;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: all 0.25s;
+    margin-top: 8px;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  }
+
+  .btn-form:hover {
+    background: var(--verde-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 48px rgba(184,255,74,0.3);
+  }
+
+  .form-disclaimer {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--cinza-texto);
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 5%;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+  }
+
+  .footer-logo span { color: var(--verde); }
+
+  .footer-text {
+    font-size: 0.78rem;
+    color: var(--cinza-texto);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .caso-inner { grid-template-columns: 1fr; gap: 40px; }
+    .two-cols { grid-template-columns: 1fr; }
+    .oferta-includes { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-ctas { flex-direction: column; }
+    .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
+    .social-proof { gap: 24px; }
+    .proof-divider { display: none; }
+    .oferta-box { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">rasc<span>.</span></div>
+  <a href="#diagnostico" class="header-cta">Diagnóstico Gratuito →</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">Maringá-PR · Clínicas Médicas e Odontológicas</div>
+  <p class="hero-eyebrow">Agência de Tráfego Pago Especializada</p>
+  <h1 class="hero-title">
+    Pare de pagar<br>
+    pra fazer <span class="line-through">show</span><br>
+    no Instagram.
+  </h1>
+  <p class="hero-subtitle">
+    Sua clínica merece anúncios otimizados para o que realmente importa: <strong>agendamentos</strong>. Não curtidas.
+  </p>
+  <div class="hero-ctas">
+    <a href="#diagnostico" class="btn-primary">
+      Quero meu diagnóstico gratuito →
+    </a>
+    <a href="#caso" class="btn-secondary">
+      Ver caso real ↓
+    </a>
+  </div>
+  <p class="hero-urgency">
+    <strong>⚠ Apenas 10 vagas disponíveis.</strong> Análise gratuita e sem compromisso.
+  </p>
+</section>
+
+<!-- PROVA SOCIAL -->
+<div class="social-proof">
+  <div class="proof-item">
+    <span class="proof-number">4,2x</span>
+    <span class="proof-label">ROI médio</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <span class="proof-number">R$34</span>
+    <span class="proof-label">Custo por lead qualificado</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <span class="proof-number">48h</span>
+    <span class="proof-label">Para ver os primeiros resultados</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <span class="proof-number">23</span>
+    <span class="proof-label">Novos agendamentos em 30 dias</span>
+  </div>
+</div>
+
+<!-- PROBLEMA -->
+<section class="problema">
+  <p class="section-label reveal">O problema</p>
+  <h2 class="section-title reveal">90% das clínicas<br>focam na métrica<br><span style="color:var(--verde)">errada.</span></h2>
+
+  <div class="cards-grid reveal">
+    <div class="card">
+      <div class="card-icon">🔴</div>
+      <h3 class="card-title">Anúncios para curtidas</h3>
+      <p class="card-text">A plataforma entrega pro público que vai dar like — não pro paciente que vai marcar consulta. Resultado? Vaidade. Não faturamento.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔴</div>
+      <h3 class="card-title">Segmentação por interesse</h3>
+      <p class="card-text">"Interessa em odontologia" é diferente de "tem dor de dente e quer resolver hoje". Intenção de compra é o que fecha agenda.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔴</div>
+      <h3 class="card-title">KPI: seguidores</h3>
+      <p class="card-text">Seguidores não pagam boletos. Se você não sabe o custo por agendamento, está investindo no escuro.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CASO REAL -->
+<section class="caso-real" id="caso">
+  <div class="caso-inner">
+    <div>
+      <p class="caso-label">Caso real · Clínica odontológica</p>
+      <h2 class="caso-quote reveal">
+        "Já gastei R$ 5 mil em anúncios e <em>não vejo resultado.</em>"
+      </h2>
+      <div class="reveal">
+        <div class="arrow-line">Anúncios otimizados para curtidas</div>
+        <div class="arrow-line">Público segmentado por engajamento</div>
+        <div class="arrow-line">KPI: quantas pessoas vão seguir o perfil</div>
+      </div>
+      <p class="reveal" style="margin-top: 24px; font-size: 1rem; color: rgba(245,245,240,0.6); line-height: 1.6;">
+        Ela estava pagando pra fazer <strong style="color: var(--branco)">show no Instagram</strong> — não pra encher a agenda.
+      </p>
+    </div>
+    <div class="reveal">
+      <div class="resultado-box">
+        <h3 style="font-family: 'Syne', sans-serif; font-size: 1.1rem; margin-bottom: 28px; color: rgba(245,245,240,0.5); font-weight: 600; letter-spacing: -0.02em;">Depois da virada em 48h:</h3>
+        <div class="resultado-item">
+          <span class="resultado-num">23</span>
+          <span class="resultado-desc">novos agendamentos confirmados</span>
+        </div>
+        <div class="resultado-item">
+          <span class="resultado-num">R$34</span>
+          <span class="resultado-desc">custo por lead qualificado</span>
+        </div>
+        <div class="resultado-item">
+          <span class="resultado-num">4,2x</span>
+          <span class="resultado-desc">de retorno sobre o investimento</span>
+        </div>
+        <p style="margin-top: 20px; font-size: 0.8rem; color: var(--cinza-texto);">Mesma clínica. Mesmo orçamento. Foco diferente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICA CERTA -->
+<section class="metrica">
+  <p class="section-label reveal">A diferença que muda tudo</p>
+  <h2 class="section-title reveal">Métrica de vaidade<br>vs. métrica de <span style="color: var(--verde)">resultado</span></h2>
+
+  <div class="two-cols reveal">
+    <div class="col-wrong">
+      <div class="col-header">✕ O erro mais caro</div>
+      <div class="metric-item">
+        <span class="metric-icon">🔴</span>
+        Likes não pagam suas contas
+      </div>
+      <div class="metric-item">
+        <span class="metric-icon">🔴</span>
+        Seguidores não enchem sua agenda
+      </div>
+      <div class="metric-item">
+        <span class="metric-icon">🔴</span>
+        Curtidas não te dão ROI
+      </div>
+      <div class="metric-item">
+        <span class="metric-icon">🔴</span>
+        Alcance sem conversão = dinheiro jogado fora
+      </div>
+    </div>
+    <div class="col-right">
+      <div class="col-header">✓ O que importa de verdade</div>
+      <div class="metric-item">
+        <span class="metric-icon">✅</span>
+        Quantos leads qualificados você gerou?
+      </div>
+      <div class="metric-item">
+        <span class="metric-icon">✅</span>
+        Quanto custou cada agendamento?
+      </div>
+      <div class="metric-item">
+        <span class="metric-icon">✅</span>
+        Quantos viraram pacientes reais?
+      </div>
+      <div class="metric-item">
+        <span class="metric-icon">✅</span>
+        Qual foi o retorno do investimento?
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 PERGUNTAS -->
+<section class="perguntas">
+  <div class="perguntas-inner">
+    <p class="section-label reveal" style="justify-content: center;">Diagnóstico rápido</p>
+    <h2 class="section-title reveal" style="text-align: center; margin-bottom: 40px;">Responda essas<br>3 perguntas</h2>
+
+    <div class="reveal">
+      <div class="pergunta-card">
+        <div class="pergunta-num">01</div>
+        <div class="pergunta-text">Você sabe quanto custa cada agendamento que vem dos seus anúncios?</div>
+      </div>
+      <div class="pergunta-card">
+        <div class="pergunta-num">02</div>
+        <div class="pergunta-text">Seus anúncios estão otimizados para conversão ou para engajamento?</div>
+      </div>
+      <div class="pergunta-card">
+        <div class="pergunta-num">03</div>
+        <div class="pergunta-text">Você consegue rastrear quantos pacientes vieram de cada campanha?</div>
+      </div>
+    </div>
+
+    <div class="pergunta-alert reveal">
+      Se respondeu <strong>"não"</strong> pra alguma, você está deixando dinheiro na mesa todos os dias.<br>
+      A boa notícia? <strong style="color: var(--verde)">Tem solução — e é rápida.</strong>
+    </div>
+  </div>
+</section>
+
+<!-- OFERTA -->
+<section class="oferta" id="oferta">
+  <div class="oferta-box reveal">
+    <p class="section-label" style="justify-content: center; margin-bottom: 16px;">Para as próximas 10 clínicas</p>
+    <h2 class="oferta-titulo">🎁 Diagnóstico<br>100% Gratuito</h2>
+    <p class="oferta-subtitulo">Sem compromisso. Sem enrolação. Só resultado.</p>
+
+    <div class="oferta-includes">
+      <div class="include-item">Análise dos seus anúncios atuais</div>
+      <div class="include-item">Mapeamento de oportunidades</div>
+      <div class="include-item">Estimativa de faturamento possível</div>
+      <div class="include-item">Estratégia personalizada para sua clínica</div>
+      <div class="include-item">Identificação das métricas que importam</div>
+      <div class="include-item">Plano de ação para os próximos 30 dias</div>
+    </div>
+
+    <a href="#diagnostico" class="btn-primary" style="font-size: 1.1rem; padding: 20px 48px; clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%); display: inline-flex;">
+      Quero meu diagnóstico gratuito →
+    </a>
+    <p class="oferta-limit">Válido <strong>só pras próximas 10 clínicas</strong> que solicitarem em Maringá.</p>
+  </div>
+</section>
+
+<!-- FORMULÁRIO -->
+<section class="form-section" id="diagnostico">
+  <div class="form-inner">
+    <h2 class="form-title reveal">Solicite agora</h2>
+    <p class="form-sub reveal">Preencha abaixo e entraremos em contato em até 2 horas úteis.</p>
+
+    <form class="reveal" onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Nome completo</label>
+        <input type="text" placeholder="Seu nome" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>WhatsApp</label>
+          <input type="tel" placeholder="(44) 9 9999-9999" required>
+        </div>
+        <div class="form-group">
+          <label>Tipo de clínica</label>
+          <select required>
+            <option value="">Selecione</option>
+            <option>Clínica odontológica</option>
+            <option>Clínica médica</option>
+            <option>Clínica estética</option>
+            <option>Consultório</option>
+            <option>Outro</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Nome da clínica / consultório</label>
+        <input type="text" placeholder="Nome da sua clínica" required>
+      </div>
+      <div class="form-group">
+        <label>Investe em tráfego pago hoje?</label>
+        <select required>
+          <option value="">Selecione</option>
+          <option>Sim, mas sem resultado</option>
+          <option>Sim, com resultado mediano</option>
+          <option>Não, mas quero começar</option>
+          <option>Nunca investi</option>
+        </select>
+      </div>
+      <button type="submit" class="btn-form">
+        Quero meu diagnóstico gratuito →
+      </button>
+      <p class="form-disclaimer">
+        Seus dados estão seguros. Não enviamos spam.<br>
+        Retorno em até 2 horas úteis via WhatsApp.
+      </p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">rasc<span>.</span> tráfego pago</div>
+  <p class="footer-text">Maringá, Paraná · 2026</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-form');
+    btn.textContent = '✓ Solicitação enviada! Entraremos em contato em breve.';
+    btn.style.background = '#2A6E00';
+    btn.style.color = '#fff';
+    btn.disabled = true;
+  }
+
+  // Urgency counter
+  let vagas = 10;
+  const urgencias = document.querySelectorAll('.hero-urgency strong, .oferta-limit strong');
+</script>
+</body>
+</html>
